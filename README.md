@@ -19,3 +19,16 @@ Simulazione (dry run):
 ```bash
 DRY_RUN=true python3 scripts/reorg_serietv.py
 ```
+
+## Alexa + Mac Mini (rete locale)
+
+Per Echo Show cucina / routine Cancello e comando vocale **spegni nas**, vedi
+[`docs/alexa-mac-mini.md`](docs/alexa-mac-mini.md).
+
+Script utili sul Mac Mini:
+
+```bash
+./scripts/diagnostica_rete.sh
+./scripts/spegni_nas.sh --dry-run
+cp .env.example .env && python3 scripts/alexa_webhook.py
+```
