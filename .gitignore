@@ -3,4 +3,5 @@ __pycache__/
 *.log
 .DS_Store
 .env
+alexa-webhook.log
 *.swp

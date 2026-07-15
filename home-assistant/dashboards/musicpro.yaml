@@ -1,0 +1,210 @@
+title: MusicPro
+views:
+  - title: Routine
+    path: routine
+    icon: mdi:play-circle
+    cards:
+      - type: markdown
+        content: |
+          **Routine rapide** — equivalenti alle scene Alexa.
+          Tocca un pulsante o usa *"Alexa, accendi MusicPro Attiva"* (dopo setup Hue).
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: button
+            name: MusicPro Attiva
+            icon: mdi:power-on
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.musicpro_attiva
+          - type: button
+            name: MusicPro Disattiva
+            icon: mdi:power-off
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.musicpro_disattiva
+          - type: button
+            name: Casa Attiva
+            icon: mdi:home
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.casa_attiva
+          - type: button
+            name: Casa Disattiva
+            icon: mdi:home-off
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.casa_disattiva
+          - type: button
+            name: Stereo Radio
+            icon: mdi:radio
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.stereo_su_radio
+          - type: button
+            name: Stereo TV
+            icon: mdi:television
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.stereo_su_televisione
+          - type: button
+            name: Radio
+            icon: mdi:radio-fm
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.radio
+          - type: button
+            name: Televisione
+            icon: mdi:television-classic
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.televisione
+          - type: button
+            name: Stufa On
+            icon: mdi:radiator
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.stufa
+          - type: button
+            name: Stufa Off
+            icon: mdi:radiator-off
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.stufa_spenta
+          - type: button
+            name: Finestra Blu Apri
+            icon: mdi:window-open
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.finestra_blu_apri
+          - type: button
+            name: Finestra Blu Chiudi
+            icon: mdi:window-closed
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.finestra_blu_chiudi
+
+  - title: Luci esterne
+    path: luci-esterne
+    icon: mdi:outdoor-lamp
+    cards:
+      - type: entities
+        title: Esterno MusicPro
+        show_header_toggle: false
+        entities:
+          - entity: switch.sonoff_10021c1de3
+            name: FaroGate
+          - entity: switch.sonoff_10021bdd90
+            name: Esterno
+          - entity: switch.sonoff_10021c1e55
+            name: Soffitto
+          - entity: switch.sonoff_1000781d7a
+            name: Insegna
+          - entity: switch.sonoff_1000fc3996
+            name: R Faretti
+          - entity: switch.sonoff_1001749638
+            name: Parcheggio
+          - entity: switch.sonoff_1000faf3cb
+            name: ROSSA
+
+  - title: Saletta
+    path: saletta
+    icon: mdi:sofa
+    cards:
+      - type: entities
+        title: Luci e prese
+        entities:
+          - entity: switch.sonoff_100051a3bf_1
+            name: Luci Sala Blu 1
+          - entity: switch.sonoff_100051a3bf_2
+            name: Luci Sala Blu 2
+          - entity: switch.sonoff_100051a3bf_3
+            name: Luci Sala Blu 3
+          - entity: switch.sonoff_10010bfe34
+            name: Luce
+          - entity: switch.sonoff_10010c719a
+            name: PA
+          - entity: switch.sonoff_10010bc94e
+            name: Prese
+          - entity: switch.sonoff_100174b6bb
+            name: Prese Arancio
+          - entity: switch.sonoff_10010c0b4d
+            name: Prese Ingresso
+
+  - title: Servizi
+    path: servizi
+    icon: mdi:cog
+    cards:
+      - type: entities
+        title: Utilità
+        entities:
+          - entity: switch.sonoff_10010c6176
+            name: Acqua
+          - entity: switch.sonoff_10017413f7
+            name: Ammazzazanzare
+          - entity: switch.sonoff_100174357d
+            name: Magnete
+          - entity: switch.sonoff_1000fc3968
+            name: Sicurezza
+          - entity: switch.sonoff_10010de703
+            name: TienimiChiusoo
+          - entity: switch.sonoff_10010c5fd9
+            name: Sottosopra
+          - entity: switch.sonoff_10010bfe30
+            name: A Condizionatore
+          - entity: switch.sonoff_10010c10b0
+            name: B Condizionatore
+
+  - title: NAS
+    path: nas
+    icon: mdi:nas
+    cards:
+      - type: entities
+        title: TrueNAS
+        entities:
+          - entity: switch.accendi_nas
+          - entity: switch.spegni_nas
+          - entity: switch.riavvia_nas
+      - type: markdown
+        content: |
+          Comandi vocali Alexa (Emulated Hue): *"Alexa, accendi Accendi NAS"*
+
+  - title: Stato
+    path: stato
+    icon: mdi:information
+    cards:
+      - type: entities
+        title: Integrazioni
+        entities:
+          - entity: update.sonoff_lan_update
+          - entity: update.hacs_update
+          - entity: update.meross_lan_update
+      - type: markdown
+        content: |
+          **Note:** luci Tuya unavailable finché non riconfiguri Tuya in Impostazioni.
+          Switch Sonoff MusicPro via cloud eWeLink.

@@ -1,0 +1,95 @@
+# Controllo alimentazione TrueNAS — esponibile ad Alexa via Home Assistant
+# Deploy: /config/packages/nas_control.yaml
+
+shell_command:
+  nas_shutdown: >-
+    ssh -o BatchMode=yes -o StrictHostKeyChecking=no -i /config/.ssh/nas_key
+    root@192.168.1.12 midclt call system.shutdown
+  nas_reboot: >-
+    ssh -o BatchMode=yes -o StrictHostKeyChecking=no -i /config/.ssh/nas_key
+    root@192.168.1.12 midclt call system.reboot
+  nas_wake: wakeonlan -i 192.168.1.255 e8:de:27:a6:a7:51
+
+input_button:
+  nas_accendi:
+    name: Accendi NAS
+    icon: mdi:power
+  nas_spegni:
+    name: Spegni NAS
+    icon: mdi:power-off
+  nas_riavvia:
+    name: Riavvia NAS
+    icon: mdi:restart
+
+script:
+  nas_accendi:
+    alias: Accendi NAS
+    icon: mdi:server-network
+    mode: single
+    sequence:
+      - service: shell_command.nas_wake
+  nas_spegni:
+    alias: Spegni NAS
+    icon: mdi:server-off
+    mode: single
+    sequence:
+      - service: shell_command.nas_shutdown
+  nas_riavvia:
+    alias: Riavvia NAS
+    icon: mdi:restart
+    mode: single
+    sequence:
+      - service: shell_command.nas_reboot
+
+# Switch one-shot per Alexa ("Alexa, accendi Accendi NAS")
+template:
+  - switch:
+      - unique_id: alexa_accendi_nas
+        name: Accendi NAS
+        state: "off"
+        turn_on:
+          - action: script.nas_accendi
+        turn_off:
+          - action: script.nas_accendi
+      - unique_id: alexa_spegni_nas
+        name: Spegni NAS
+        state: "off"
+        turn_on:
+          - action: script.nas_spegni
+        turn_off:
+          - action: script.nas_spegni
+      - unique_id: alexa_riavvia_nas
+        name: Riavvia NAS
+        state: "off"
+        turn_on:
+          - action: script.nas_riavvia
+        turn_off:
+          - action: script.nas_riavvia
+
+automation:
+  - id: nas_accendi_da_pulsante
+    alias: NAS — Accendi da pulsante
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_button.nas_accendi
+    action:
+      - service: script.nas_accendi
+
+  - id: nas_spegni_da_pulsante
+    alias: NAS — Spegni da pulsante
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_button.nas_spegni
+    action:
+      - service: script.nas_spegni
+
+  - id: nas_riavvia_da_pulsante
+    alias: NAS — Riavvia da pulsante
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: input_button.nas_riavvia
+    action:
+      - service: script.nas_riavvia

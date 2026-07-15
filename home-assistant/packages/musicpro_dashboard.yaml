@@ -1,0 +1,12 @@
+# Dashboard MusicPro (YAML) + registrazione sidebar
+# File dashboard: /config/dashboards/musicpro.yaml
+
+lovelace:
+  mode: storage
+  dashboards:
+    musicpro-dashboard:
+      mode: yaml
+      title: MusicPro
+      icon: mdi:music
+      show_in_sidebar: true
+      filename: dashboards/musicpro.yaml
