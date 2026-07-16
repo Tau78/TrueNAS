@@ -129,6 +129,20 @@ Pool dati: `Share` (2.64T usati, **~888G liberi**) · boot: `boot-pool` (216G, O
 
 ---
 
+## Tailscale (accesso remoto)
+
+Per installare l'app Tailscale su TrueNAS SCALE e accedere al NAS da ovunque:
+
+- Guida completa: [`docs/tailscale.md`](docs/tailscale.md)
+- Script automatico: [`scripts/install_tailscale.sh`](scripts/install_tailscale.sh)
+
+Installazione rapida via SSH:
+
+```bash
+TS_AUTHKEY='tskey-auth-...' ssh -o BatchMode=yes root@truenas.local \
+  'bash -s' < scripts/install_tailscale.sh
+```
+
 ## Script
 
 ### Gestione alimentazione NAS
