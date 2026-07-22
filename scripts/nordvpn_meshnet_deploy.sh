@@ -36,9 +36,8 @@ docker run -d \\
   --hostname truenas-meshnet \\
   --restart unless-stopped \\
   --init \\
+  --privileged \\
   --network host \\
-  --cap-add=NET_ADMIN \\
-  --device /dev/net/tun \\
   -e NORDVPN_TOKEN='$NORDVPN_TOKEN' \\
   -v $REMOTE_DIR/data:/var/lib/nordvpn \\
   $IMAGE"
